@@ -1,5 +1,6 @@
 #include <thread>
 #include "include/Server.h"
+#include "include/MergeSort.h"
 
 Server::Server(const std::string &assignmentName) {
     this->assignmentName = assignmentName;
@@ -112,10 +113,27 @@ std::string Server::intToString(int value) {
     return ss.str();
 }
 
-void Server::initialize(const std::string &taskName,
-                        const std::vector<int> &listUnsorted) {
-}
-
 int Server::stringToInt(char value) {
     return value - '0';
+}
+
+std::vector<int> Server::listReplaceIndexed(std::vector<int> xs,
+                                            int p,
+                                            int q,
+                                            std::vector<int> ys) {
+    xs.erase(xs.begin() + p, xs.begin() + q);
+    xs.insert(xs.begin() + p, ys.begin(), ys.end());
+    return xs;
+}
+
+std::vector<int> Server::getListSliced(std::vector<int> xs, int p, int q) {
+    vector<int> xsSliced = std::vector<int>(xs.begin() + p, xs.begin() + q);
+    return xsSliced;
+
+}
+
+void Server::initialize(const std::string &taskName,
+                        const std::vector<int> &listUnsorted) {
+    MergeSort mergeSort(taskName);
+    mergeSort.run(listUnsorted);
 }

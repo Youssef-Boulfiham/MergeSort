@@ -20,7 +20,8 @@ class Server {
 
     static std::string setTimeToString(std::chrono::system_clock::time_point timeToConvert);
 
-    static std::string timeDifferenceToString(std::chrono::duration<long long, std::ratio<1, 1000000000>> timeDifference);
+    static std::string
+    timeDifferenceToString(std::chrono::duration<long long, std::ratio<1, 1000000000>> timeDifference);
 
     [[nodiscard]] std::string getName() const;
 
@@ -34,7 +35,7 @@ class Server {
 
 public:
 
-    explicit Server(const std::string& assignmentName);
+    explicit Server(const std::string &assignmentName);
 
     static std::string printListOfLists(const std::vector<std::vector<int>> &listOfLists);
 
@@ -46,6 +47,16 @@ public:
 
     static std::string printList(const std::vector<int> &list);
 
-    void initialize(const std::string& taskName, const std::vector<int>& listUnsorted);
+    std::vector<int> getListSliced(std::vector<int> xs,
+                                    int p,
+                                    int q);
+
+    std::vector<int> listReplaceIndexed(std::vector<int> xs,
+                                        int p,
+                                        int q,
+                                        std::vector<int> ys);
+
+    void initialize(const std::string &taskName, const std::vector<int> &listUnsorted);
 };
+
 #endif // SERVER_H
