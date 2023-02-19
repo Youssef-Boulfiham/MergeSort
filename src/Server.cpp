@@ -36,16 +36,31 @@ std::string Server::setTimeToString(std::chrono::system_clock::time_point timeTo
 std::string Server::timeDifferenceToString(
         std::chrono::duration<long long int, std::ratio<1, 1000000000>> timeDifference) {
     auto nanoseconds = timeDifference.count();
-    long long seconds = nanoseconds / 1000000000;
-    nanoseconds %= 1000000000;
+    long long milliseconds = nanoseconds / 1000000;
+    nanoseconds %= 1000000;
+    long long seconds = milliseconds / 1000;
+    milliseconds %= 1000;
     long long minutes = seconds / 60;
     seconds %= 60;
     long long hours = minutes / 60;
     minutes %= 60;
+    long long days = hours / 24;
+    hours %= 24;
     std::stringstream oss;
-    oss << hours << " uren, " << minutes << " minuten en " << seconds << " secondes";
+    if (days > 0) {
+        oss << days << " dagen, ";
+    }
+    if (hours > 0 || days > 0) {
+        oss << hours << " uren, ";
+    }
+    if (minutes > 0 || hours > 0 || days > 0) {
+        oss << minutes << " minuten, ";
+    }
+    oss << seconds << " seconden, " << milliseconds << " milliseconden en " << nanoseconds << " nanoseconden";
     return oss.str();
 }
+
+
 
 std::string Server::getName() const { return this->assignmentName; }
 
@@ -75,11 +90,11 @@ std::string Server::printListOfLists(const std::vector<std::vector<int>> &listOf
 }
 
 std::ostream &operator<<(std::ostream &os, Server &Server) {
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+//    std::this_thread::sleep_for(std::chrono::seconds(2));
     std::string verschil = Server.timeDifferenceToString(Server.setTimeCurrent() - Server.getTimeStart());
     os << "Server " << Server.getName() << std::endl
        << "START TIME " << Server.setTimeToString(Server.getTimeStart()) << std::endl
-       << "test " << verschil;
+       << verschil;
 
     return os;
 }

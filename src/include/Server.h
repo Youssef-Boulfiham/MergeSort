@@ -16,12 +16,7 @@ class Server {
     std::chrono::system_clock::time_point timeCurrent;
     std::chrono::duration<long long, std::ratio<1, 1000000000>> timeDifference{};
 
-    static std::chrono::system_clock::time_point setTimeCurrent();
-
     static std::string setTimeToString(std::chrono::system_clock::time_point timeToConvert);
-
-    static std::string
-    timeDifferenceToString(std::chrono::duration<long long, std::ratio<1, 1000000000>> timeDifference);
 
     [[nodiscard]] std::string getName() const;
 
@@ -57,6 +52,11 @@ public:
                                         std::vector<int> ys);
 
     void initialize(const std::string &taskName, const std::vector<int> &listUnsorted);
+
+    static std::chrono::system_clock::time_point setTimeCurrent();
+
+    static std::string
+    timeDifferenceToString(std::chrono::duration<long long, std::ratio<1, 1000000000>> timeDifference);
 };
 
 #endif // SERVER_H

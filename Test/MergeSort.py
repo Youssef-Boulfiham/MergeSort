@@ -32,6 +32,6 @@ def merge_sort(xs: List[int]) -> None:
     return xs
 
 
-lijst = [5, 6, 9, 6, 1, 8, 2, 0, 5, 6]
+lijst = [8, 24, 54, 87, 122, 176, 233, 471, 538, 0]
 # lijst = [1, 0, 3, 2]
 merge_sort(lijst)

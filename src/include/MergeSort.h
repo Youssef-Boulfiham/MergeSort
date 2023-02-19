@@ -13,8 +13,8 @@ using std::string, std::cout, std::endl, std::vector;
 
 class MergeSort {
 public:
-    MergeSort(string taskName);
-    std::vector<int> run(vector<int> xs);
+    MergeSort(const string& taskName);
+    static std::vector<int> run(vector<int> xs);
 
 };
 
