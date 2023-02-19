@@ -33,6 +33,8 @@ std::string Server::setTimeToString(std::chrono::system_clock::time_point timeTo
     return oss.str();
 }
 
+#include <iomanip> // for std::setw() and std::setfill()
+
 std::string Server::timeDifferenceToString(
         std::chrono::duration<long long int, std::ratio<1, 1000000000>> timeDifference) {
     auto nanoseconds = timeDifference.count();
@@ -56,10 +58,13 @@ std::string Server::timeDifferenceToString(
     if (minutes > 0 || hours > 0 || days > 0) {
         oss << minutes << " minuten, ";
     }
-    oss << seconds << " seconden, " << milliseconds << " milliseconden en " << nanoseconds << " nanoseconden";
+    oss << seconds << " seconden, ";
+    oss << std::setfill('0') << std::setw(3) << milliseconds << ",";
+    oss << std::setfill('0') << std::setw(3) << nanoseconds / 1000000 << ",";
+    oss << std::setfill('0') << std::setw(3) << (nanoseconds / 1000) % 1000;
+    oss << " milisecondes";
     return oss.str();
 }
-
 
 
 std::string Server::getName() const { return this->assignmentName; }
@@ -149,6 +154,7 @@ std::vector<int> Server::getListSliced(std::vector<int> xs, int p, int q) {
 
 void Server::initialize(const std::string &taskName,
                         const std::vector<int> &listUnsorted) {
+    cout << taskName << endl;
     MergeSort mergeSort(taskName);
     mergeSort.run(listUnsorted);
 }

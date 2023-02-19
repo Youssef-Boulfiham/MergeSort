@@ -68,7 +68,7 @@ std::vector<int> MergeSort::run(vector<int> xs) {
         unit *= 2;
     }
     // bereken duur van operatie
-    //cout << server.timeDifferenceToString(server.setTimeCurrent()- timeStart) << endl;
+    cout << server.timeDifferenceToString(server.setTimeCurrent()- timeStart) << endl << endl;
     return xs;
 }
 
